@@ -19,3 +19,19 @@ fn factorial(n: i32) -> i32 {
 
 // IMPORTANT: A stack is a simple data structure with a push and pop method. 
 // it's with a queue data structure, but in a queue, the last out, the first in.
+
+// ADDITIONAL NOTES:
+
+/*
+    A function in the call stack is in a partial complete state. It's: the function
+    does not finished yet. 
+
+    When the top function in the stack is out, the following start again from where
+    it stopped! 
+*/
+
+// NOTES FOR OTHER READERS:
+
+/*
+    I'm so sorry by the bad English. I'm still learning it. 
+*/

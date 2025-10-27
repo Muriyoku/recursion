@@ -1,3 +1,21 @@
+use std::{ops::Add, usize};
+
+trait Removable {
+    type Item;
+
+    fn len(&self) -> usize;
+    fn is_empty(&self) -> bool;
+    fn remove(&mut self, index: usize) -> Self::Item;
+}
+
+impl Removable for Vec<i32> {
+    type Item = i32;
+
+    fn remove(&mut self, index: usize) -> Self::Item {Vec::remove(self, index)}
+    fn is_empty(&self) -> bool {Vec::is_empty(&self)}
+    fn len(&self) -> usize {Vec::len(&self)} 
+}
+
 fn main() {
     let mut sum_vec: Vec<i32> = vec![1,2,3,4];
 
@@ -11,13 +29,16 @@ fn factorial(n: i32) -> i32 {
 }
 
 // It's possible to copy the array and mut the copy instead of original array
-fn sum(n: &mut Vec<i32>) -> i32 {
+fn sum<T>(n: &mut T) -> i32 where 
+    T: Removable,
+    <T as Removable>::Item: Add<i32, Output = i32>
+{
     let len: usize = n.len().saturating_sub(1);
 
-    if n.is_empty() {
-        return 0;
-    } else {
-        return n.remove(len) + sum(n);
+    if n.is_empty() { 
+        return 0 
+    } else { 
+        return n.remove(len) + sum(n) 
     }
 }
 

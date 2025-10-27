@@ -1,10 +1,24 @@
 fn main() {
+    let mut sum_vec: Vec<i32> = vec![1,2,3,4];
+
     println!("{}", factorial(10));
+    println!("{}", sum(&mut sum_vec));
 }
 
 fn factorial(n: i32) -> i32 {
     if n <= 1 {return n; }
     else { return n * factorial(n - 1) };
+}
+
+// It's possible to copy the array and mut the copy instead of original array
+fn sum(n: &mut Vec<i32>) -> i32 {
+    let len: usize = n.len().saturating_sub(1);
+
+    if n.is_empty() {
+        return 0;
+    } else {
+        return n.remove(len) + sum(n);
+    }
 }
 
 // SEARCH: tail recursion

@@ -19,10 +19,12 @@ impl Removable for Vec<i32> {
 fn main() {
     let mut sum_vec: Vec<i32> = vec![1,2,3,4];
     let mut cou_vec: Vec<i32> = vec![1,2,3,4];
+    let max_vec: Vec<i32> = vec![1,2,10,3,4];
 
-    println!("{}", factorial(10));
-    println!("{}", sum(&mut sum_vec));
-    println!("{}", count(&mut cou_vec, 0));
+    println!("Factorial {}", factorial(10));
+    println!("Sum {}", sum(&mut sum_vec));
+    println!("Count {}", count(&mut cou_vec, 0));
+    println!("Max Number {}", max_num(&max_vec, 0, 0));
 }
 
 fn factorial(n: i32) -> i32 {
@@ -51,6 +53,21 @@ fn count(list: &mut Vec<i32>, c: i32) -> i32 {
         list.pop();
         return count(list, c + 1)
     }
+}
+
+fn max_num(list: &Vec<i32>, mut tracker: i32, idx: usize) -> i32 {
+
+    if list.is_empty() {
+        return 0;
+    }
+
+    if idx > list.len().saturating_sub(1) {
+        return tracker
+    } else {
+        if tracker < list[idx] { tracker = list[idx] };
+
+        return max_num(list, tracker, idx + 1)
+    };
 }
 
 // SEARCH: tail recursion

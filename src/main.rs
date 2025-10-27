@@ -59,6 +59,10 @@ fn max_num(list: &Vec<i32>, mut tracker: i32, idx: usize) -> i32 {
 
     if list.is_empty() {
         return 0;
+    } 
+
+    if list.len() < 2 {
+        return list[0];
     }
 
     if idx > list.len().saturating_sub(1) {

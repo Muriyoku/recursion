@@ -18,9 +18,11 @@ impl Removable for Vec<i32> {
 
 fn main() {
     let mut sum_vec: Vec<i32> = vec![1,2,3,4];
+    let mut cou_vec: Vec<i32> = vec![1,2,3,4];
 
     println!("{}", factorial(10));
     println!("{}", sum(&mut sum_vec));
+    println!("{}", count(&mut cou_vec, 0));
 }
 
 fn factorial(n: i32) -> i32 {
@@ -39,6 +41,15 @@ fn sum<T>(n: &mut T) -> i32 where
         return 0 
     } else { 
         return n.remove(len) + sum(n) 
+    }
+}
+
+fn count(list: &mut Vec<i32>, c: i32) -> i32 {
+    if list.is_empty() {
+        return c;
+    } else {
+        list.pop();
+        return count(list, c + 1)
     }
 }
 
